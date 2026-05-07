@@ -1,15 +1,20 @@
-# Python
-backend/venv/
-__pycache__/
+# Environments & Dependencies
+*/node_modules/
+*/venv/
+*/env/
+build/
+dist/
+
+# Python leftovers
+*/__pycache__/
 *.pyc
 
-# React
-frontend/node_modules/
-frontend/build/
-
-# Env
+# Local Config & Secrets
 .env
+.vscode/
 
-# Audio
+# Media
 *.mp3
 *.wav
+
+
