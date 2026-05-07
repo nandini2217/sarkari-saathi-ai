@@ -1,13 +1,13 @@
 # Environments & Dependencies
-*/node_modules/
-*/venv/
-*/env/
+**/node_modules/
+**/venv/
+**/env/
 build/
 dist/
 
 # Python leftovers
-*/__pycache__/
-*.pyc
+**/__pycache__/
+**/*.pyc
 
 # Local Config & Secrets
 .env
