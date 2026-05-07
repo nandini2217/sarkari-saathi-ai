@@ -1,54 +1,52 @@
 # 🇮🇳 Sarkari Saathi AI
 
-Sarkari Saathi AI is a full-stack multilingual AI assistant designed to help citizens easily understand and access Indian government schemes using text and voice interactions.
+Sarkari Saathi AI is a full-stack multilingual AI assistant built to simplify access to Indian government schemes through AI-powered text and voice interactions.
 
-The project combines:
-- ⚡ FastAPI Backend
-- 🎨 React Frontend
-- 🧠 AI-powered RAG System
-- 🎤 Voice Input & Output
-- 🌐 Multilingual Support
+The platform enables users to search, understand, and interact with government welfare schemes in multiple Indian languages using Retrieval-Augmented Generation (RAG), semantic search, and voice-enabled AI assistance.
 
 ---
 
-# 🚀 Features
+# 🚀 Key Features
 
-## ✅ AI Scheme Assistant
+## 🤖 AI-Powered Government Scheme Assistant
 Ask questions about government schemes in natural language.
 
-Example:
-- "Help for farmers"
-- "Scholarships for girls"
-- "Schemes for unemployed youth"
+### Example Queries
+- “Help for farmers”
+- “Scholarships for girls”
+- “Schemes for unemployed youth”
+- “Government support for small businesses”
 
 ---
 
-## 🌐 Multilingual Support
-Supports multiple Indian languages:
-- Hindi
+## 🌐 Multilingual Language Support
+Supports multiple Indian languages including:
 - English
+- Hindi
 - Marathi
 - Tamil
 - Bengali
-- and more...
+- Telugu
+- and more
 
 ---
 
 ## 🎤 Voice Assistant
-Users can:
-- Speak queries using microphone
-- Get AI-generated answers
-- Hear responses using text-to-speech
+Integrated voice-based interaction system:
+- Speech-to-Text
+- AI Response Generation
+- Text-to-Speech Output
+- Microphone & Audio File Support
 
 ---
 
-## 🧠 RAG (Retrieval-Augmented Generation)
-The AI retrieves relevant government scheme information before generating answers for better accuracy.
+## 🧠 Retrieval-Augmented Generation (RAG)
+Implements RAG architecture to retrieve relevant scheme data before generating AI responses for improved accuracy and contextual understanding.
 
 ---
 
-## 🔎 Semantic Search
-Uses embeddings and semantic similarity to find the most relevant schemes.
+## 🔎 Semantic Search Engine
+Uses embeddings and vector similarity search to identify the most relevant government schemes based on user intent.
 
 ---
 
@@ -57,15 +55,20 @@ Uses embeddings and semantic similarity to find the most relevant schemes.
 ## Backend
 - Python
 - FastAPI
+- Uvicorn
 - SpeechRecognition
 - gTTS
 - Sentence Transformers
-- Uvicorn
 
 ## Frontend
 - React.js
 - Axios
 - CSS
+
+## AI & NLP
+- RAG Pipeline
+- Semantic Embeddings
+- NLP-based Query Processing
 
 ---
 
@@ -77,149 +80,166 @@ sarkari-saathi/
 ├── backend/
 │   └── sarkari-saathi-ai/
 │       ├── app/
+│       │   ├── routes/
+│       │   ├── services/
+│       │   ├── core/
+│       │   └── data/
+│       │
 │       ├── requirements.txt
 │       └── main.py
 │
 ├── frontend/
 │   └── sarkari-frontend/
-│       ├── src/
 │       ├── public/
-│       └── package.json
+│       ├── src/
+│       ├── package.json
+│       └── package-lock.json
 │
+├── .gitignore
 └── README.md
+```
 
+---
 
-⚙️ Backend Setup
+# ⚙️ Backend Setup
 
-1️⃣ Navigate to backend
+## 1️⃣ Navigate to Backend
 
+```bash
 cd backend/sarkari-saathi-ai
+```
 
-2️⃣ Create virtual environment
+## 2️⃣ Create Virtual Environment
 
+```bash
 python -m venv venv
+```
 
-3️⃣ Activate virtual environment
+## 3️⃣ Activate Virtual Environment
 
-Windows
+### Windows
+```bash
 venv\Scripts\activate
-Linux/Mac
+```
+
+### Linux / Mac
+```bash
 source venv/bin/activate
+```
 
-4️⃣ Install dependencies
+## 4️⃣ Install Dependencies
 
+```bash
 pip install -r requirements.txt
+```
 
-5️⃣ Run FastAPI server
+## 5️⃣ Run FastAPI Server
 
+```bash
 uvicorn app.main:app --reload
+```
 
-Backend runs on:
+Backend URL:
+```bash
 http://127.0.0.1:8000
+```
 
+Swagger Documentation:
+```bash
+http://127.0.0.1:8000/docs
+```
 
-💻 Frontend Setup
+---
 
+# 💻 Frontend Setup
 
-1️⃣ Navigate to frontend
+## 1️⃣ Navigate to Frontend
 
+```bash
 cd frontend/sarkari-frontend
+```
 
-2️⃣ Install dependencies
+## 2️⃣ Install Dependencies
 
+```bash
 npm install
+```
 
-3️⃣ Start React app
+## 3️⃣ Start React Application
 
+```bash
 npm start
+```
 
-Frontend runs on:
+Frontend URL:
+```bash
 http://localhost:3000
+```
 
+---
 
-📡 API Endpoints
+# 📡 API Endpoints
 
-Health Check
+| Endpoint | Method | Description |
+|----------|---------|-------------|
+| `/` | GET | Health Check |
+| `/language/process` | POST | Language Translation |
+| `/schemes/search` | GET | Government Scheme Search |
+| `/schemes/semantic-search` | GET | Semantic Search |
+| `/api/v1/rag/ask` | GET | AI-powered RAG Query |
+| `/api/v1/voice/ask` | POST | Voice Assistant Endpoint |
 
-GET /
+---
 
-Language Processing
+# 🎯 Example API Request
 
-POST /language/process
+```bash
+GET /api/v1/rag/ask?query=help for farmers
+```
 
-Scheme Search
+---
 
-GET /schemes/search
+# 📸 Application Modules
 
-Semantic Search
+- FastAPI Swagger Documentation
+- AI Scheme Search Engine
+- Semantic Retrieval System
+- Voice-enabled Assistant
+- React Frontend Dashboard
 
-GET /schemes/semantic-search
+---
 
-RAG Query
+# 🔮 Future Enhancements
 
-GET /api/v1/rag/ask
+- 🔐 User Authentication & Authorization
+- ☁️ Cloud Deployment
+- 📱 Mobile Application
+- 🗣️ Real-time Voice Streaming
+- 🤖 Advanced LLM Integration
+- 📊 Analytics Dashboard
+- 🌍 Expanded Regional Language Support
 
+---
 
-Example:
-
-/api/v1/rag/ask?query=help for farmers
-Voice Assistant
-POST /api/v1/voice/ask
-
-
-Supports:
-
-Voice file upload
-
-Microphone interaction
-
-AI voice response
-
-📸 Screenshots
-
-Swagger API Docs
-
-FastAPI interactive documentation
-
-React Frontend
-
-AI chat interface with voice support
-
-
-🔮 Future Improvements
-
-🔐 User Authentication
-
-📱 Mobile App
-
-☁️ Cloud Deployment
-
-🗣️ Real-time Streaming Voice
-
-🤖 LLM Integration
-
-📊 Admin Dashboard
-
-🌍 Regional Language Expansion
-
-
-
-🤝 Contributing
+# 🤝 Contributing
 
 Contributions are welcome.
 
-Fork the repository
-Create a new branch
-Commit changes
-Push to branch
-Open Pull Request
+### Steps:
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to your branch
+5. Open a Pull Request
 
+---
 
-📜 License
+# 📜 License
 
 This project is licensed under the MIT License.
 
+---
 
-👩‍💻 Author
+# 👩‍💻 Author
 
-Developed by Nandini 🚀
+Developed by **Nandini** 🚀
