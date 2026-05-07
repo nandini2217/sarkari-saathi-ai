@@ -1,0 +1,73 @@
+[
+  {
+    "id": 1,
+    "name": "PM Kisan Samman Nidhi",
+    "category": "Income Support",
+    "state": "All India",
+    "eligibility": "Small and marginal farmers with cultivable land",
+    "benefits": "₹6000 annual financial assistance in 3 installments",
+    "documents": [
+      "Aadhaar Card",
+      "Bank Account",
+      "Land Records"
+    ],
+    "description": "PM-KISAN provides direct income support to eligible farmer families across India."
+  },
+
+  {
+    "id": 2,
+    "name": "Pradhan Mantri Fasal Bima Yojana",
+    "category": "Crop Insurance",
+    "state": "All India",
+    "eligibility": "Farmers growing notified crops",
+    "benefits": "Insurance coverage for crop loss due to natural disasters",
+    "documents": [
+      "Aadhaar Card",
+      "Land Records",
+      "Bank Passbook"
+    ],
+    "description": "Provides financial support to farmers suffering crop loss or damage."
+  },
+
+  {
+    "id": 3,
+    "name": "Kisan Credit Card",
+    "category": "Agriculture Loan",
+    "state": "All India",
+    "eligibility": "Farmers, fishermen, and animal husbandry farmers",
+    "benefits": "Short-term credit support for farming activities",
+    "documents": [
+      "Aadhaar Card",
+      "PAN Card",
+      "Land Documents"
+    ],
+    "description": "KCC provides affordable loans to farmers for agriculture and allied activities."
+  },
+
+  {
+    "id": 4,
+    "name": "Soil Health Card Scheme",
+    "category": "Soil Testing",
+    "state": "All India",
+    "eligibility": "All farmers",
+    "benefits": "Free soil testing and crop nutrient recommendations",
+    "documents": [
+      "Aadhaar Card"
+    ],
+    "description": "Helps farmers improve productivity through soil analysis."
+  },
+
+  {
+    "id": 5,
+    "name": "Paramparagat Krishi Vikas Yojana",
+    "category": "Organic Farming",
+    "state": "All India",
+    "eligibility": "Farmers interested in organic farming",
+    "benefits": "Financial assistance and training for organic farming",
+    "documents": [
+      "Aadhaar Card",
+      "Land Records"
+    ],
+    "description": "Promotes cluster-based organic farming and sustainable agriculture."
+  }
+]

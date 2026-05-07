@@ -1,0 +1,20 @@
+[
+  {
+    "name": "PM Awas Yojana",
+    "category": "Housing",
+    "eligibility": "Low income families",
+    "benefits": "Financial assistance for building houses"
+  },
+  {
+    "name": "PM Kisan Yojana",
+    "category": "Agriculture",
+    "eligibility": "Small and marginal farmers",
+    "benefits": "₹6000 per year income support"
+  },
+  {
+    "name": "Ayushman Bharat",
+    "category": "Health",
+    "eligibility": "Economically weaker sections",
+    "benefits": "Free health insurance up to ₹5 lakh"
+  }
+]
