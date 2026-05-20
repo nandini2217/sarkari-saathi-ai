@@ -1,69 +1,109 @@
 from transformers import pipeline
-from app.services.embedding_service import semantic_search
 from app.services.security_service import mask_pii
+from app.services.rag_context_service import build_context
+from app.services.faiss_service import search_faiss
 import re
 
-# Load model
-generator = pipeline("text2text-generation", model="google/flan-t5-base")
+# =========================
+# LOAD MODEL
+# =========================
+generator = pipeline(
+    "text2text-generation",
+    model="google/flan-t5-base"
+)
 
+# =========================
+# MAIN RAG FUNCTION
+# =========================
 def generate_response(query: str):
-    # 🔐 Step 1: Mask sensitive data
+
+    # 🔐 STEP 1 — MASK SENSITIVE DATA
     safe_query = mask_pii(query)
 
-    # 🔍 Step 2: Retrieve relevant schemes
-    results = semantic_search(safe_query, top_k=1)
+    # =========================
+    # STEP 2 — FAISS RETRIEVAL
+    # =========================
+    results = search_faiss(safe_query, top_k=3)
 
     if not results:
         return {
-            "answer": "Sorry, I could not find any relevant government scheme for your query.",
-            "sources": []
+            "answer": "Sorry, I could not find accurate information for your query.",
+            "sources": [],
+            "metadata": {
+                "retrieved_schemes": 0
+            }
         }
 
-    # 🧠 Step 3: Build structured context
-    scheme = results[0]
-    # Using labels helps the model identify specific data points better
-    context_data = f"Scheme: {scheme['name']}, Benefits: {scheme['benefits']}, Eligibility: {scheme['eligibility']}"
+    # =========================
+    # STEP 3 — BUILD CONTEXT
+    # =========================
+    context = build_context(results)
 
-    # ✍️ Step 4: Few-Shot Prompting
-    # We provide one example (shot) to teach the model the desired length and tone.
-    prompt = f"""Answer the question in two descriptive sentences using the provided context.
+    # =========================
+    # STEP 4 — BETTER PROMPT
+    # =========================
+    prompt = f"""
+You are Sarkari Saathi AI.
 
-Example:
-Context: Scheme: Ladli Behna, Benefits: ₹1250 per month, Eligibility: Women in MP
-Question: Tell me about the Ladli Behna scheme?
-Answer: The Ladli Behna scheme provides ₹1250 per month to eligible women in Madhya Pradesh. This financial assistance aims to improve the health and nutrition status of women in the state.
+You help Indian farmers understand agriculture schemes.
 
-Actual Task:
-Context: {context_data}
-Question: {safe_query}
-Answer:"""
+Rules:
+- Only answer using the provided context.
+- Keep answers simple and helpful.
+- Mention scheme names clearly.
+- If information is missing, say:
+  'Sorry, I could not find accurate information.'
 
-    # 🤖 Step 5: Optimized Generation Logic
+Context:
+{context}
+
+User Question:
+{safe_query}
+
+Answer:
+"""
+
+    # =========================
+    # STEP 5 — GENERATE RESPONSE
+    # =========================
     response = generator(
         prompt,
-        max_length=100,
-        num_beams=5,             # Higher beams for better quality
+        max_length=180,
+        num_beams=5,
         repetition_penalty=1.2,
-        length_penalty=1.5,      # Encourages the model to be more descriptive
+        length_penalty=1.0,
         early_stopping=True
     )
 
-    # 🧹 Step 6: Clean output
-    answer = response[0]['generated_text'].strip()
+    # =========================
+    # STEP 6 — CLEAN OUTPUT
+    # =========================
+    answer = response[0]["generated_text"].strip()
 
-    # Final cleanup to remove any potential "Answer:" prefix from the model
-    answer = re.sub(r"^(Answer|Output|Result):", "", answer, flags=re.IGNORECASE).strip()
+    # Remove unwanted prefixes
+    answer = re.sub(
+        r"^(Answer|Output|Result):",
+        "",
+        answer,
+        flags=re.IGNORECASE
+    ).strip()
+
+    # Fix encoding issue
     answer = answer.replace("â‚¹", "₹")
 
-    # Ensure it ends with a period
+    # Ensure proper punctuation
     if not answer.endswith("."):
         answer += "."
 
+    # =========================
+    # FINAL RESPONSE
+    # =========================
     return {
-    "answer": answer,
-    "sources": results,
-    "metadata": {
-        "retrieved_schemes": len(results),
-        "model": "google/flan-t5-base"
+        "answer": answer,
+        "sources": results,
+        "metadata": {
+            "retrieved_schemes": len(results),
+            "model": "google/flan-t5-base",
+            "search_type": "FAISS Semantic Search"
+        }
     }
-}
